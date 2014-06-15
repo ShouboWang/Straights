@@ -8,6 +8,8 @@
 class ComputerPlayer: public Player{
 public:
     ComputerPlayer(std::string);
+    Command& turn(std::vector<Card*>) const;
+    
 };
 
 #endif /* defined(__Straights__ComputerPlayer__) */

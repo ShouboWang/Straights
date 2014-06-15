@@ -8,6 +8,7 @@
  - move player display to human only
  - quit
  - display deck
+ - display order - smallest to largest
  */
 
 
@@ -56,10 +57,14 @@ void Game::startGame(){
     }
     
     // First player must play
-    cardsOnTable_.push_back(players_[startingPlayer_]->playCard(SPADE, SEVEN));
-    
+    //cardsOnTable_.push_back(players_[startingPlayer_]->playCard(SPADE, SEVEN));
+    std::cout << "A new round begins. ";
     for(int turnIndex = startingPlayer_;;turnIndex++){
-        
+        std::cout << "It’s player" << (turnIndex%4) << "’s turn to play."<<endl;
+        Command command = players_[turnIndex%4]->turn(cardsOnTable_);
+        if(command.type == PLAY) {
+            cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command.card.getSuit(), command.card.getRank()));
+        }
     }
 }
 

@@ -10,3 +10,8 @@
 ComputerPlayer::ComputerPlayer(std::string playerName):Player(playerName){
     
 }
+
+Command& ComputerPlayer::turn(std::vector<Card*>) const{
+    Command c;
+    return c;
+}

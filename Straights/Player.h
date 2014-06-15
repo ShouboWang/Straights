@@ -19,14 +19,14 @@ public:
     Player(std::string playerName);
     int getScore() const;
     void receiveDeltCards(Card*);
-    Command& turn(std::vector<Card*>, std::vector<Card*>) const;
+    virtual Command& turn(std::vector<Card*>) const = 0;
     bool hasSevenSpade() const;
     Card* playCard(const Suit, const Rank);
+    bool checkCardPlayable(const Card*, const std::vector<Card*>) const;
 
 private:
     Player(Player&);
     Player& operator=(Player&);
-    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
     int score;
 
