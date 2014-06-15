@@ -45,7 +45,8 @@ void Deck::shuffle(){
      CARD_COUNT is the constant 52
      cards_ is an array of pointers to cards
      */
-        int n = CARD_COUNT;
+
+    int n = CARD_COUNT;
 
     while ( n > 1 ) {
         int k = (int) (lrand48() % n);
