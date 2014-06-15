@@ -1,3 +1,17 @@
+/*
+ To do
+ - Rage quit (game)
+ - copy human->AI 
+ - score (player)
+ - round
+ - AI
+ - move player display to human only
+ - quit
+ - display deck
+ */
+
+
+
 #include "Game.h"
 #include <iostream>
 #include <sstream>
@@ -48,6 +62,7 @@ void Game::startGame(){
         
     }
 }
+
 
 
 

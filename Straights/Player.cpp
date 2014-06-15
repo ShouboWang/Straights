@@ -15,7 +15,7 @@ Player::Player(std::string playerName):playerName_(playerName){
 
 
 void Player::receiveDeltCards(Card* card) {
-    cardsOnHand_.push_back(card);
+    cardsOnHand_.push_back(card);//front or back
 }
 
 Command& Player::turn(std::vector<Card*> cardsOntable, std::vector<Card*> legalPlays) const{
