@@ -43,6 +43,7 @@
 		04E7C494194D371200994FE7 /* ComputerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComputerPlayer.h; sourceTree = "<group>"; };
 		04E7C496194D372500994FE7 /* HumanPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HumanPlayer.cpp; sourceTree = "<group>"; };
 		04E7C497194D372500994FE7 /* HumanPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HumanPlayer.h; sourceTree = "<group>"; };
+		04E7C499194D391B00994FE7 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +76,7 @@
 		04E7C47A194D0E1D00994FE7 /* Straights */ = {
 			isa = PBXGroup;
 			children = (
+				04E7C499194D391B00994FE7 /* Game.h */,
 				04E7C484194D36B200994FE7 /* Game.cpp */,
 				04E7C487194D36E500994FE7 /* Deck.cpp */,
 				04E7C488194D36E500994FE7 /* Deck.h */,
