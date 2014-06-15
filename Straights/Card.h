@@ -1,14 +1,30 @@
-//
-//  Card.h
-//  Straights
-//
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
-//
+#ifndef _CARD_
+#define _CARD_
 
-#ifndef __Straights__Card__
-#define __Straights__Card__
+#include <ostream>
+#include <istream>
 
-#include <iostream>
+enum Suit { CLUB, DIAMOND, HEART, SPADE, SUIT_COUNT };
+enum Rank { ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN,
+    EIGHT, NINE, TEN, JACK, QUEEN, KING, RANK_COUNT };
 
-#endif /* defined(__Straights__Card__) */
+class Card{
+	friend std::istream &operator>>(std::istream &, Card &);
+    
+public:
+	Card(Suit, Rank);
+	Suit getSuit() const;
+	Rank getRank() const;
+	
+private:
+	Suit suit_;
+	Rank rank_;
+};
+
+bool operator==(const Card &, const Card &);
+
+//output/input Card in the format <rank><suit>
+std::ostream &operator<<(std::ostream &, const Card &);
+std::istream &operator>>(std::istream &, Card &);
+
+#endif
