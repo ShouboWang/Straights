@@ -8,16 +8,15 @@
 
 #include "Deck.h"
 
-Deck::Deck(){
+Deck::Deck():CARD_COUNT(52){
+    
     //index of the cards_ array;
     int index = 0;
     //iterate through Suit enum
     for (int i = CLUB; i < SUIT_COUNT; i++){
         //iterate through Rank enum
         for (int j = ACE; j < RANK_COUNT; j++){
-            Card* tempCard = new Card((Suit)i, (Rank)j);
-            cards_[index] = tempCard;
-            index ++;
+            cards_[index++] = new Card((Suit)i, (Rank)j);
         }
     }
 }
@@ -33,12 +32,20 @@ Deck::~Deck(){
 }
 
 void Deck::shuffle(){
+    
+    
+    for(int i = 0; i < 52; i++){
+        std::cout << *cards_[i] << " ";
+    }
+    std::cout << std::endl;
+     
     /* To ensure that the your cards are ordered the same way as
      the given program, use this shuffling algorithm.
      
      CARD_COUNT is the constant 52
      cards_ is an array of pointers to cards
      */
+
     int n = CARD_COUNT;
 
     while ( n > 1 ) {
@@ -48,4 +55,9 @@ void Deck::shuffle(){
         cards_[n] = cards_[k];
         cards_[k] = c;
     }
+    
+    for(int i = 0; i < 52; i++){
+        std::cout << *cards_[i] << " ";
+    }
+    std::cout << std::endl;
 }

@@ -11,6 +11,7 @@
 
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
+#include "Deck.h"
 
 class Game{
 public:
@@ -19,7 +20,8 @@ public:
     void startGame();
 private:
     void invitePlayers();
-    Player* players_[];
+    Player* players_[4];
+    Deck* deck_;
     
 };
 

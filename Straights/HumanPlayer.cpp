@@ -7,3 +7,6 @@
 //
 
 #include "HumanPlayer.h"
+HumanPlayer::HumanPlayer(std::string playerName):Player(playerName){
+    
+}

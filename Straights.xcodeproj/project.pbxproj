@@ -78,21 +78,21 @@
 		04E7C47A194D0E1D00994FE7 /* Straights */ = {
 			isa = PBXGroup;
 			children = (
+				04E7C49A194D51CC00994FE7 /* PlayStraight.cpp */,
 				04E7C499194D391B00994FE7 /* Game.h */,
 				04E7C484194D36B200994FE7 /* Game.cpp */,
-				04E7C487194D36E500994FE7 /* Deck.cpp */,
 				04E7C488194D36E500994FE7 /* Deck.h */,
-				04E7C48A194D36F100994FE7 /* Player.cpp */,
+				04E7C487194D36E500994FE7 /* Deck.cpp */,
 				04E7C48B194D36F100994FE7 /* Player.h */,
-				04E7C48D194D36FA00994FE7 /* Card.cpp */,
+				04E7C48A194D36F100994FE7 /* Player.cpp */,
 				04E7C48E194D36FA00994FE7 /* Card.h */,
-				04E7C490194D370300994FE7 /* Command.cpp */,
+				04E7C48D194D36FA00994FE7 /* Card.cpp */,
 				04E7C491194D370300994FE7 /* Command.h */,
-				04E7C493194D371200994FE7 /* ComputerPlayer.cpp */,
+				04E7C490194D370300994FE7 /* Command.cpp */,
 				04E7C494194D371200994FE7 /* ComputerPlayer.h */,
-				04E7C496194D372500994FE7 /* HumanPlayer.cpp */,
+				04E7C493194D371200994FE7 /* ComputerPlayer.cpp */,
 				04E7C497194D372500994FE7 /* HumanPlayer.h */,
-				04E7C49A194D51CC00994FE7 /* PlayStraight.cpp */,
+				04E7C496194D372500994FE7 /* HumanPlayer.cpp */,
 			);
 			path = Straights;
 			sourceTree = "<group>";

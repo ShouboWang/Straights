@@ -6,8 +6,16 @@ Game::Game(){
     
 }
 
+Game::~Game(){
+    for(int index = 0; index < 4; index++){
+        delete players_[index];
+    }
+};
+
 void Game::startGame(){
-    invitePlayers();
+    //invitePlayers();
+    deck_ = new Deck();
+    deck_->shuffle();
 }
 
 void Game::invitePlayers(){
@@ -19,9 +27,9 @@ void Game::invitePlayers(){
             std::exit(0);
         }
         if(playerType == "h"){
-            players_[index]= new HumanPlayer("Player"+std::to_string(index+1));
+            players_[index] = new HumanPlayer("Player"+std::to_string(index+1));
         } else if(playerType == "c"){
-            players_[index]= new ComputerPlayer("Player"+std::to_string(index+1));
+            players_[index] = new ComputerPlayer("Player"+std::to_string(index+1));
         }
     }
 }

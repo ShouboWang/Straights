@@ -19,8 +19,8 @@ public:
     void shuffle();     //shuffle algorithm
     
 private:
-    const int CARD_COUNT = 52;
-    Card* cards_[];
+    const int CARD_COUNT;
+    Card* cards_[52];
     
 };
 
