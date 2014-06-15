@@ -10,5 +10,18 @@
 #define __Straights__Deck__
 
 #include <iostream>
+#include "Card.h"
+
+class Deck{
+public:
+    Deck();             //constuctor
+    ~Deck();            //destructor
+    void shuffle();     //shuffle algorithm
+    
+private:
+    const int CARD_COUNT = 52;
+    Card* cards_[];
+    
+};
 
 #endif /* defined(__Straights__Deck__) */
