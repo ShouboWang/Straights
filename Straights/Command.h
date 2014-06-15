@@ -1,14 +1,18 @@
-//
-//  Command.h
-//  Straights
-//
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
-//
+#ifndef _COMMAND_
+#define _COMMAND_
 
-#ifndef __Straights__Command__
-#define __Straights__Command__
+#include "Card.h"
+#include <istream>
 
-#include <iostream>
+enum Type { PLAY, DISCARD, DECK, QUIT, RAGEQUIT, BAD_COMMAND };
 
-#endif /* defined(__Straights__Command__) */
+struct Command{
+	Type type;
+	Card card;
+	
+	Command() : type(BAD_COMMAND), card(SPADE, ACE) {}
+};
+
+std::istream &operator>>(std::istream &, Command &);
+
+#endif
