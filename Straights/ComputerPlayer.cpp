@@ -7,3 +7,6 @@
 //
 
 #include "ComputerPlayer.h"
+ComputerPlayer::ComputerPlayer(std::string playerName):Player(playerName){
+    
+}
