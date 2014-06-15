@@ -10,6 +10,8 @@
 
 Deck::Deck():CARD_COUNT(52){
     
+    currentCardIndex_ = 0;
+    
     //index of the cards_ array;
     int index = 0;
     //iterate through Suit enum
@@ -32,13 +34,6 @@ Deck::~Deck(){
 }
 
 void Deck::shuffle(){
-    
-    
-    for(int i = 0; i < 52; i++){
-        std::cout << *cards_[i] << " ";
-    }
-    std::cout << std::endl;
-     
     /* To ensure that the your cards are ordered the same way as
      the given program, use this shuffling algorithm.
      
@@ -55,9 +50,8 @@ void Deck::shuffle(){
         cards_[n] = cards_[k];
         cards_[k] = c;
     }
-    
-    for(int i = 0; i < 52; i++){
-        std::cout << *cards_[i] << " ";
-    }
-    std::cout << std::endl;
+}
+
+Card* Deck::getNextCard(){
+    return cards_[currentCardIndex_++];
 }

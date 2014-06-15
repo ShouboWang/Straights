@@ -12,6 +12,7 @@
 #include "HumanPlayer.h"
 #include "ComputerPlayer.h"
 #include "Deck.h"
+#include <vector>
 
 class Game{
 public:
@@ -22,7 +23,9 @@ private:
     void invitePlayers();
     Player* players_[4];
     Deck* deck_;
-    
+    std::vector<Card*> cardsOnTable_;
+    std::vector<Card*> legalCardPlay_;
+    int startingPlayer_;
 };
 
 

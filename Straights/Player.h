@@ -11,18 +11,24 @@
 
 #include <iostream>
 #include "Card.h"
+#include "Command.h"
 #include <vector>
 
 class Player{
 public:
-    Player(std::string);
+    Player(std::string playerName);
     int getScore() const;
-    void receiveDeltCards(std::vector<Card*>);
+    void receiveDeltCards(Card*);
+    Command& turn(std::vector<Card*>, std::vector<Card*>) const;
+    bool hasSevenSpade() const;
+    Card* playCard(const Suit, const Rank);
 
 private:
     Player(Player&);
     Player& operator=(Player&);
+    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
+    int score;
 
 protected:
     std::vector<Card*> cardsOnHand_;
