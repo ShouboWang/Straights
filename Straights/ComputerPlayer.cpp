@@ -7,7 +7,22 @@
 //
 
 #include "ComputerPlayer.h"
-ComputerPlayer::ComputerPlayer(std::string playerName):Player(playerName){
+ComputerPlayer::ComputerPlayer(const std::string& playerName):Player(playerName){
+    
+}
+
+//copy human data to computer data when user rage quites
+ComputerPlayer::ComputerPlayer(const HumanPlayer& rageUser): Player(rageUser.getPlayerName()){
+    //copy the score of the human player
+    setScore(rageUser.getScore());
+    
+    //copy the cards on hand
+    for (int i = 0; i < rageUser.cardsOnHand_.size(); i++){
+        
+    
+    }
+    
+    
     
 }
 

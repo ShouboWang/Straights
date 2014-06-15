@@ -18,6 +18,7 @@ class Player{
 public:
     Player(std::string playerName);
     int getScore() const;
+    void setScore(const int &);              //set score
     void receiveDeltCards(Card*);
     virtual Command& turn(std::vector<Card*>) const = 0;
     bool hasSevenSpade() const;

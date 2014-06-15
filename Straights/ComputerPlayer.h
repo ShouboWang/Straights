@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Player.h"
+#include "HumanPlayer.h"
 
 class ComputerPlayer: public Player{
 public:
