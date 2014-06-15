@@ -10,6 +10,7 @@
 #define __Straights__Deck__
 
 #include <iostream>
+#include <cstdlib>
 #include "Card.h"
 
 class Deck{
@@ -17,11 +18,12 @@ public:
     Deck();             //constuctor
     ~Deck();            //destructor
     void shuffle();     //shuffle algorithm
+    Card* getNextCard();    // Recieve the next card in deck
     
 private:
+    int currentCardIndex_;
     const int CARD_COUNT;
     Card* cards_[52];
-    
 };
 
 #endif /* defined(__Straights__Deck__) */
