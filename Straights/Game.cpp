@@ -56,6 +56,7 @@ void Game::startGame(){
     }
     
     // First player must play
+    std::cout<< "A new round begins. It's player " << startingPlayer_ << "'s turn to play" << std::endl;
     cardsOnTable_.push_back(players_[startingPlayer_]->playCard(SPADE, SEVEN));
     
     for(int turnIndex = startingPlayer_;;turnIndex++){

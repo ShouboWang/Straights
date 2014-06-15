@@ -18,14 +18,16 @@ class Player{
 public:
     Player(std::string playerName);
     int getScore() const;
+    void setScore(const int &);              //set score
     void receiveDeltCards(Card*);
     Command& turn(std::vector<Card*>, std::vector<Card*>) const;
     bool hasSevenSpade() const;
     Card* playCard(const Suit, const Rank);
+    std::string getPlayerName() const;                //accessor
 
 private:
-    Player(Player&);
-    Player& operator=(Player&);
+    Player(Player&);                                    //prohibited copy
+    Player& operator=(Player&);                         //prohibited assignment
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
     int score;

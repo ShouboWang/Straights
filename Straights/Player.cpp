@@ -18,6 +18,14 @@ void Player::receiveDeltCards(Card* card) {
     cardsOnHand_.push_back(card);//front or back
 }
 
+std::string Player::getPlayerName() const{
+    return playerName_;
+}
+
+void Player::setScore(const int& newScore){
+    score = newScore;
+}
+
 Command& Player::turn(std::vector<Card*> cardsOntable, std::vector<Card*> legalPlays) const{
     
     // Display the current cards on the table and the avlaible options for player
@@ -44,7 +52,7 @@ void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::
     std::string suits[SUIT_COUNT] = {"C", "D", "H", "S"};
     std::string ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
 		"7", "8", "9", "10", "J", "Q", "K"};
-    
+
     for(int index = 0; index < cardsOnTable.size(); index++){
         switch (cardsOnTable[index]->getSuit()){
             case(CLUB):
@@ -69,7 +77,7 @@ void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::
         playerHand.append(ranks[cardsOnHand_[index]->getRank()]+suits[cardsOnHand_[index]->getSuit()]+" ");
     }
     
-    std::string playerLegalCards = "Your hand: ";
+    std::string playerLegalCards = "Legal plays: ";
     for(int index = 0; index < cardsOnHand_.size(); index++){
         for(int legalIndex = 0; legalIndex < legalPlays.size(); legalIndex++){
             if(cardsOnHand_[index] == legalPlays[legalIndex]){
