@@ -9,7 +9,19 @@
 #ifndef Straights_Game_h
 #define Straights_Game_h
 
+#include "HumanPlayer.h"
+#include "ComputerPlayer.h"
 
+class Game{
+public:
+    Game();
+    ~Game();
+    void startGame();
+private:
+    void invitePlayers();
+    Player* players_[];
+    
+};
 
 
 #endif
