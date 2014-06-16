@@ -9,6 +9,12 @@
 #include "Player.h"
 #include <vector>
 
+
+const std::string Player::suits[SUIT_COUNT] = {"C", "D", "H", "S"};
+const std::string Player::ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
+    "7", "8", "9", "10", "J", "Q", "K"};
+
+
 Player::Player(std::string playerName):playerName_(playerName){
     score_ = 0;
 }
