@@ -20,15 +20,14 @@ public:
     int getScore() const;                       // Responds to score request
     void setScore(const int &);                 // Set score
     void calculateScore();                      // Calculate score after each round
-    void receiveDeltCards(Card*);               // Adds a card to the hand
-    virtual Command* turn(std::vector<Card*>) const = 0;    
+    void getDeltCards(Card*);                   // Add a card to the hand
+    bool hasSevenSpade() const;                 // Checks if the player has the seven of spade
+    
+    virtual Command* turn(std::vector<Card*>) const = 0;
     virtual void displayHand(std::vector<Card*>) const = 0;
     
-    
-    //Play
+    // Command - play
     Card* playCard(const Suit, const Rank);
-    
-    bool hasSevenSpade() const;
     
     
     //Card* playCard(const Suit, const Rank);
@@ -57,6 +56,7 @@ protected:
     
     static const std::string suits[SUIT_COUNT]; // Array of string that corresponds to the suit
     static const std::string ranks[RANK_COUNT]; // Array of string that corresponds to the rank
+    std::vector<Card*> getLegalCards(const std::vector<Card*>) const;
 };
 
 #endif

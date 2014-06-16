@@ -46,82 +46,33 @@ Player::PlayerData::~PlayerData(){
 /*
  Player Functions
  */
+
+// Constructor for Player
 Player::Player(std::string playerName){
     playerData = new PlayerData(playerName);
-    
 }
 
+// Copye constructor for Player
 Player::Player(const Player& player) {
     playerData = new PlayerData(*player.playerData);
 }
 
-
-void Player::receiveDeltCards(Card* card) {
+// Get the card delt and adds the card to hand
+void Player::getDeltCards(Card* card) {
     playerData->cardsInHand_.push_back(card);
 }
 
+// Responds to score request
 int Player::getScore() const {
     return playerData->playerScore_;
 }
 
-
-void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const{
-    
-    std::string displayMessage = "Cards on the table:/n";
-    std::string clubs = "Clubs: ";
-    std::string diamonds = "Diamonds: ";
-    std::string hearts = "Hearts: ";
-    std::string spades = "Spades: ";
-
-    for(int index = 0; index < cardsOnTable.size(); index++){
-        switch (cardsOnTable[index]->getSuit()){
-            case(CLUB):
-                clubs.append(ranks[cardsOnTable[index]->getRank()] + " ");
-                break;
-            case(DIAMOND):
-                diamonds.append(ranks[cardsOnTable[index]->getRank()] + " ");
-                break;
-            case(HEART):
-                hearts.append(ranks[cardsOnTable[index]->getRank()] + " ");
-                break;
-            case(SPADE):
-                spades.append(ranks[cardsOnTable[index]->getRank()] + " ");
-                break;
-            default:
-                break;
-        }
-    }
-    
-    std::string playerHand = "Your hand: ";
-    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
-        playerHand.append(ranks[playerData->cardsInHand_[index]->getRank()]+
-                          suits[playerData->cardsInHand_[index]->getSuit()]+" ");
-    }
-    
-    std::string playerLegalCards = "Legal plays: ";
-    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
-        for(int legalIndex = 0; legalIndex < legalPlays.size(); legalIndex++){
-            if(playerData->cardsInHand_[index] == legalPlays[legalIndex]){
-                playerLegalCards.append(ranks[playerData->cardsInHand_[index]->getRank()]
-                                        +suits[playerData->cardsInHand_[index]->getSuit()]+" ");
-            }
-        }
-    }
-    
-    std::cout << displayMessage << std::endl;
-    std::cout << clubs << std::endl;
-    std::cout << diamonds << std::endl;
-    std::cout << hearts << std::endl;
-    std::cout << spades << std::endl;
-    std::cout << playerHand << std::endl;
-    std::cout << playerLegalCards << std::endl;
-    
-}
-
+// Sets the score for player
 void Player::setScore(const int& newScore){
     playerData->playerScore_ = newScore;
 }
 
+// Checks if the player has the seven of spade
 bool Player::hasSevenSpade() const {
     for(int index = 0; index < playerData->cardsInHand_.size(); index++) {
         if(playerData->cardsInHand_[index]->getSuit() == SPADE && playerData->cardsInHand_[index]->getRank() == SEVEN)
@@ -133,8 +84,8 @@ bool Player::hasSevenSpade() const {
 // Responds to the "play" command
 // If the card is invalid play, throw runtime_error
 // If the card is valid play, remove the card from hand and return the card
-Card* playCard(const Suit, const Rank){
-    throw "error";
+Card* Player::playCard(const Suit suit, const Rank rank){
+    return removeCardFromHand(suit, rank);
 }
 
 // Remove a card from player's hand and returns the card back
@@ -173,7 +124,8 @@ void Player::calculateScore(){
     playerData->playerScore_+=newScore;
 
 }
-    
+
+// Checks if the card is a legal card to be played
 bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsOnTable) const {
         // Seven of Spade
         if(card->getRank() == SEVEN && card->getSuit() == SPADE) return true;
@@ -187,4 +139,15 @@ bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsO
             if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()+1)) return true;
         }
     return false;
+}
+
+// Returns a vector of Arrays that contains all the legal cards for a player's turn
+std::vector<Card*> Player::getLegalCards(const std::vector<Card*> cardsOnTable) const {
+    std::vector<Card*> legalCards;
+    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
+        if(checkCardPlayable(playerData->cardsInHand_[index], cardsOnTable)){
+            legalCards.push_back(playerData->cardsInHand_[index]);
+        }
+    }
+    return legalCards;
 }
