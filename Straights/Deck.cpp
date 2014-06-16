@@ -55,3 +55,11 @@ void Deck::shuffle(){
 Card* Deck::getNextCard(){
     return cards_[currentCardIndex_++];
 }
+
+void Deck::displayDeck() const {
+    for(int row = 0; row < 4; row++){
+        for(int col = 0; col < 13; col++)
+            std::cout << *cards_[row*13+col] << " ";
+        std::cout<<std::endl;
+    }
+}

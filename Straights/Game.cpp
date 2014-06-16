@@ -61,9 +61,12 @@ void Game::startGame(){
     std::cout << "A new round begins. ";
     for(int turnIndex = startingPlayer_;;turnIndex++){
         std::cout << "It’s player " << (turnIndex%4) << "’s turn to play."<<std::endl;
-        Command command = players_[turnIndex%4]->turn(cardsOnTable_);
-        if(command.type == PLAY) {
-            cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command.card.getSuit(), command.card.getRank()));
+        Command *command = players_[turnIndex%4]->turn(cardsOnTable_);
+        if(command->type == PLAY) {
+            cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command->card.getSuit(), command->card.getRank()));
+        }
+        if(command->type == DECK){
+            deck_->displayDeck();
         }
     }
 }

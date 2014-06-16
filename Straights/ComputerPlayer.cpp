@@ -24,7 +24,7 @@ ComputerPlayer::ComputerPlayer(const HumanPlayer& rageUser): Player(rageUser.get
     
 }
     
-Command& ComputerPlayer::turn(std::vector<Card*>) const{
-    Command c;
+Command* ComputerPlayer::turn(std::vector<Card*>) const{
+    Command *c;
     return c;
 }

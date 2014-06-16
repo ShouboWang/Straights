@@ -19,6 +19,7 @@ public:
     ~Deck();            //destructor
     void shuffle();     //shuffle algorithm
     Card* getNextCard();    // Recieve the next card in deck
+    void displayDeck() const;
     
 private:
     int currentCardIndex_;

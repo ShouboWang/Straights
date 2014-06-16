@@ -21,7 +21,7 @@ public:
     void setScore(const int &);              //set score
     void calculateScore();                  //calculate score after each round
     void receiveDeltCards(Card*);
-    virtual Command& turn(std::vector<Card*>) const = 0;
+    virtual Command* turn(std::vector<Card*>) const = 0;
     bool hasSevenSpade() const;
     Card* playCard(const Suit, const Rank);
     std::string getPlayerName() const;                //accessor
