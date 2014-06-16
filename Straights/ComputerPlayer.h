@@ -9,7 +9,7 @@
 class ComputerPlayer: public Player{
 public:
     ComputerPlayer(const std::string& playerName):Player(playerName){};                                     //constructor
-    ComputerPlayer(const HumanPlayer& humanPlayer):Player(humanPlayer){};     //copy constructor
+    ComputerPlayer(const Player& humanPlayer):Player(humanPlayer){};     //copy constructor
     Command* turn(const std::vector<Card*>) const;
     void displayHand(std::vector<Card*>) const{};
     

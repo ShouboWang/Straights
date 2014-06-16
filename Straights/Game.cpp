@@ -65,12 +65,14 @@ void Game::startGame(){
         std::cout << "It’s player " << (turnIndex%4) << "’s turn to play."<<std::endl;
         players_[turnIndex%4]->displayHand(cardsOnTable_);
         Command *command = players_[turnIndex%4]->turn(cardsOnTable_);
+        
         if(command->type == DECK){
             do{
                 deck_->displayDeck();
                 command = players_[turnIndex%4]->turn(cardsOnTable_);
             }while(command->type == DECK);
         }
+        
         if(command->type == PLAY) {
             do{
                 try{
@@ -84,6 +86,10 @@ void Game::startGame(){
         } else if(command->type == QUIT){
             delete command;
             return;
+        } else if(command->type == RAGEQUIT) {
+            Player *player = new ComputerPlayer(*players_[turnIndex%4]);
+            delete players_[turnIndex%4];
+            players_[turnIndex%4] = player;
         }
         
         delete command;

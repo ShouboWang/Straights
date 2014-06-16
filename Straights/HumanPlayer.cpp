@@ -32,6 +32,10 @@ Command* HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
             if(legalCards.size() == 0) {
                 legalPlay = true;
             }
+        } else if(command->type == QUIT){
+            legalPlay = true;
+        } else if(command->type == RAGEQUIT){
+            legalPlay = true;
         }
         if(!legalPlay){
             std::cout << "This is not a legal play." << std::endl;
