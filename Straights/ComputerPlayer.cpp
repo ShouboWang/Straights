@@ -12,32 +12,13 @@ Command* ComputerPlayer::turn(std::vector<Card*> cardsOnTable) const{
     
     Command* command = new Command();
     
-    //check for legal playable cards
-    for(int index = 0; index < cardsOnTable.size(); index++){
-        if(checkCardPlayable(playerData->cardsInHand_[index],cardsOnTable)){
-            //if there is a legal card, play the card
-            std::string card="";
-            card.append(ranks[playerData->cardsInHand_[index]->getRank()] + suits[playerData->cardsInHand_[index]->getSuit()]);
-            std::cout << "Player "<< playerData->playerName_ << " plays " << card <<std::endl;
-            
-            //create a command for the legal play
-            command->type = PLAY;
-            command->card = removeCardFromHand(playerData->cardsInHand_[index]->getSuit(), playerData->cardsInHand_[index]->getSuit());
-
-            return command;
-        }
+    std::vector<Card*> legalCards = getLegalCards(cardsOnTable);
+    if(legalCards.size() >0){
+        command->type = PLAY;
+        command->card = Card(legalCards[0]->getSuit(),legalCards[0]->getRank());
+    } else {
+        command->type = DISCARD;
+        command->card = Card(playerData->cardsInHand_[0]->getSuit(),playerData->cardsInHand_[0]->getRank());
     }
-    
-    //dont have legal cards, so discard the first card on hand
-    //create command
-    command->type = DISCARD;
-    command->card = *cardsOnHand_[0];
-    
-    //add first card on hand to discardedCards list
-    
-    //delete the first card on hand
-    
-    
-    
     return command;
 }
