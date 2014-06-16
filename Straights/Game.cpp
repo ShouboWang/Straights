@@ -46,7 +46,7 @@ void Game::startGame(){
     // Deal the cards
     for(int playerIndex = 0; playerIndex < 4; playerIndex ++){
         for(int cardI = 0; cardI < 13; cardI++){
-            players_[playerIndex]->receiveDeltCards(deck_->getNextCard());
+            players_[playerIndex]->getDeltCards(deck_->getNextCard());
         }
     }
     
