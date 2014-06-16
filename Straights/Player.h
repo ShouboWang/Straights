@@ -35,7 +35,6 @@ public:
     
 private:
     Player& operator=(Player&);                             // Prohibited assignment operator
-    Card* removeCardFromHand(const Suit, const Rank);       // Returns a card from hand
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     
 protected:
@@ -57,6 +56,7 @@ protected:
     static const std::string suits[SUIT_COUNT]; // Array of string that corresponds to the suit
     static const std::string ranks[RANK_COUNT]; // Array of string that corresponds to the rank
     std::vector<Card*> getLegalCards(const std::vector<Card*>) const;
+    Card* removeCardFromHand(const Suit, const Rank);       // Returns a card from hand
 };
 
 #endif
