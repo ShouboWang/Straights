@@ -46,10 +46,6 @@ void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const 
     std::string hearts = "Hearts: ";
     std::string spades = "Spades: ";
     
-    std::string suits[SUIT_COUNT] = {"C", "D", "H", "S"};
-    std::string ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
-		"7", "8", "9", "10", "J", "Q", "K"};
-    
     for(unsigned int index = 0; index < cardsOnTable.size(); index++){
         switch (cardsOnTable[index]->getSuit()){
             case(CLUB):
@@ -71,18 +67,15 @@ void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const 
     
     std::string playerHand = "Your hand: ";
     
-    playerData->cardsInHand;
-    
-    
-    for(unsigned int index = 0; index < playerData-> cardsOnTable.size(); index++){
-        playerHand.append(ranks[cardsOnHand_[index]->getRank()]+suits[cardsOnHand_[index]->getSuit()]+" ");
+    for(unsigned int index = 0; index < playerData-> cardsInHand_.size(); index++){
+        playerHand.append(ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]+" ");
     }
     
-    std::string playerLegalCards = "Your hand: ";
-    for(unsigned int index = 0; index < cardsOnHand_.size(); index++){
+    std::string playerLegalCards = "Legal plays: ";
+    for(unsigned int index = 0; index < playerData->cardsInHand_.size(); index++){
         for(unsigned int legalIndex = 0; legalIndex < legalPlays.size(); legalIndex++){
-            if(cardsOnHand_[index] == legalPlays[legalIndex]){
-                playerLegalCards.append(ranks[cardsOnHand_[index]->getRank()]+suits[cardsOnHand_[index]->getSuit()]+" ");
+            if(playerData->cardsInHand_[index] == legalPlays[legalIndex]){
+                playerLegalCards.append(ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]+" ");
             }
         }
     }
