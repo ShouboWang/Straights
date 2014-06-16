@@ -32,6 +32,23 @@ int Player::getScore() const {
     return score_;
 }
 
+Card* Player::getCardsOnHand(const int& index) const{
+    return cardsOnHand_[index];
+}
+
+Card* Player::getDiscardedCards(const int& index) const{
+    return discardedCards_[index];
+}
+
+int Player::getSizeCardsOnHand() const{
+    return (int)cardsOnHand_.size();
+}
+
+int Player::getSizeDiscardedCards() const{
+    return (int)discardedCards_.size();
+}
+
+
 
 void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const{
     

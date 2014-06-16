@@ -17,10 +17,18 @@ ComputerPlayer::ComputerPlayer(const HumanPlayer& rageUser): Player(rageUser.get
     setScore(rageUser.getScore());
     
     //copy the cards on hand
-    //for (int i = 0; i < rageUser.cardsOnHand_.size(); i++){
-        
+    for (int i = 0; i < rageUser.getSizeCardsOnHand(); i++){
+        Card* temp = new Card(rageUser.getCardsOnHand(i)->getSuit(), rageUser.getCardsOnHand(i)->getRank());
+        cardsOnHand_.push_back(temp);
+        delete temp;
+    }
     
-    //}
+    //copy discarded cards
+    for (int i = 0; i < rageUser.getSizeDiscardedCards(); i++){
+        Card* temp = new Card(rageUser.getDiscardedCards(i)->getSuit(), rageUser.getDiscardedCards(i)->getRank());
+        cardsOnHand_.push_back(temp);
+        delete temp;
+    }
     
 }
     

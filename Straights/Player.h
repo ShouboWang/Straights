@@ -26,7 +26,12 @@ public:
     Card* playCard(const Suit, const Rank);
     std::string getPlayerName() const;                //accessor
     bool checkCardPlayable(const Card*, const std::vector<Card*>) const;
-
+    
+    Card* getCardsOnHand(const int&) const;            //get the card of a certain index in cardsOnHand_
+    Card* getDiscardedCards(const int&) const;        //get the card of an index in DiscardedCards_
+    int getSizeCardsOnHand() const;                   //return size of CardsOnHand_
+    int getSizeDiscardedCards() const;                    //return size of DiscardedCards_
+    
 private:
     Player(Player&);                                    //prohibited copy
     Player& operator=(Player&);                         //prohibited assignment
