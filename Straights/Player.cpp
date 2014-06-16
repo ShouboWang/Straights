@@ -9,6 +9,12 @@
 #include "Player.h"
 #include <vector>
 
+
+const std::string Player::suits[SUIT_COUNT] = {"C", "D", "H", "S"};
+const std::string Player::ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
+    "7", "8", "9", "10", "J", "Q", "K"};
+
+
 Player::Player(std::string playerName):playerName_(playerName){
     score = 0;
 }
@@ -48,10 +54,6 @@ void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::
     std::string diamonds = "Diamonds: ";
     std::string hearts = "Hearts: ";
     std::string spades = "Spades: ";
-    
-    std::string suits[SUIT_COUNT] = {"C", "D", "H", "S"};
-    std::string ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
-		"7", "8", "9", "10", "J", "Q", "K"};
 
     for(int index = 0; index < cardsOnTable.size(); index++){
         switch (cardsOnTable[index]->getSuit()){
@@ -116,3 +118,31 @@ Card* Player::playCard(const Suit suit, const Rank rank){
     
     return cardToReturn;
 }
+
+void Player::calculateScore(){
+    //print out the list of discarded cards of the player
+    std::cout<< "Player " << playerName_ << "'s discards: ";
+    std::string discards="";
+    int newScore = 0;
+    
+    //find all discarded cards and calculate new score based on its rank
+    for (int i = 0; i < discardedCards_.size(); i++){
+        discards.append(ranks[discardedCards_[i]->getRank()] + suits[discardedCards_[i]->getSuit()] + " ");
+        newScore += discardedCards_[i]->getRank()+1;
+    }
+    
+    std::cout << discards<< std::endl;
+    
+    std::cout<<"Player " << playerName_ << "'s score: " << score<< " + " << newScore << " = " << score+newScore;
+    
+    //calculate total score
+    score+=newScore;
+
+}
+
+
+
+
+
+
+

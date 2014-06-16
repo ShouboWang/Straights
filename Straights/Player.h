@@ -19,6 +19,7 @@ public:
     Player(std::string playerName);
     int getScore() const;
     void setScore(const int &);              //set score
+    void calculateScore();                  //calculate score after each round
     void receiveDeltCards(Card*);
     Command& turn(std::vector<Card*>, std::vector<Card*>) const;
     bool hasSevenSpade() const;
@@ -31,6 +32,8 @@ private:
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
     int score;
+    static const std::string suits[SUIT_COUNT];
+    static const std::string ranks[RANK_COUNT];
 
 protected:
     std::vector<Card*> cardsOnHand_;
