@@ -14,25 +14,37 @@ HumanPlayer::HumanPlayer(std::string playerName):Player(playerName){
 Command* HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
     
     Command* command = new Command();
-    
+    bool legalPlay = false;
     do{
+        legalPlay = false;
         std::cout << ">";
         std::cin>>*command;
+        if(command->type == PLAY) {
+            std::vector<Card*> legalCards = getLegalCards(cardsOnTable);
+            for(int index = 0; index < legalCards.size(); index++){
+                if(command->card.getSuit() == legalCards[index]->getSuit() &&
+                   command->card.getRank() == legalCards[index]->getRank()){
+                    legalPlay = true;
+                }
+            }
+        } else if(command->type == DISCARD) {
+            std::vector<Card*> legalCards = getLegalCards(cardsOnTable);
+            if(legalCards.size() == 0) {
+                legalPlay = true;
+            }
+        }
+        if(!legalPlay){
+            std::cout << "This is not a legal play." << std::endl;
+        }
         
-    } while(command->type == BAD_COMMAND);
+    } while(command->type == BAD_COMMAND || !legalPlay);
     
     return command;
 }
 
 void HumanPlayer::displayHand(std::vector<Card*> cardsOnTable) const{
     // Get the legal plays for the player
-    std::vector<Card*> legalPlays;
-    
-    for(unsigned int index = 0; index < cardsOnTable.size(); index++){
-        if(checkCardPlayable(cardsOnTable[index],cardsOnTable)){
-            legalPlays.push_back(cardsOnTable[index]);
-        }
-    }
+    std::vector<Card*> legalPlays = getLegalCards(cardsOnTable);
     
     // Display the current cards on the table and the avlaible options for player
     displayGameTable(cardsOnTable, legalPlays);
