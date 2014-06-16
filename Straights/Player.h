@@ -23,13 +23,15 @@ public:
     virtual Command& turn(std::vector<Card*>) const = 0;
     bool hasSevenSpade() const;
     Card* playCard(const Suit, const Rank);
+    std::string getPlayerName() const;                //accessor
     bool checkCardPlayable(const Card*, const std::vector<Card*>) const;
 
 private:
-    Player(Player&);
-    Player& operator=(Player&);
+    Player(Player&);                                    //prohibited copy
+    Player& operator=(Player&);                         //prohibited assignment
+    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
-    int score;
+    int score_;
 
 protected:
     std::vector<Card*> cardsOnHand_;

@@ -17,15 +17,13 @@ ComputerPlayer::ComputerPlayer(const HumanPlayer& rageUser): Player(rageUser.get
     setScore(rageUser.getScore());
     
     //copy the cards on hand
-    for (int i = 0; i < rageUser.cardsOnHand_.size(); i++){
+    //for (int i = 0; i < rageUser.cardsOnHand_.size(); i++){
         
     
-    }
-    
-    
+    //}
     
 }
-
+    
 Command& ComputerPlayer::turn(std::vector<Card*>) const{
     Command c;
     return c;

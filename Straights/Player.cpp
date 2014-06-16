@@ -10,7 +10,7 @@
 #include <vector>
 
 Player::Player(std::string playerName):playerName_(playerName){
-    score = 0;
+    score_ = 0;
 }
 
 
@@ -18,6 +18,18 @@ void Player::receiveDeltCards(Card* card) {
     cardsOnHand_.push_back(card);//front or back
 }
 
+std::string Player::getPlayerName() const{
+    return playerName_;
+}
+
+int Player::getScore() const {
+    return score_;
+}
+
+
+void Player::setScore(const int& newScore){
+    score_ = newScore;
+}
 
 bool Player::hasSevenSpade() const {
     for(int index = 0; index < cardsOnHand_.size(); index++) {
@@ -40,11 +52,11 @@ Card* Player::playCard(const Suit suit, const Rank rank){
 }
 
 bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsOnTable) const {
+    // Seven of Spade
+    if(card->getRank() == SEVEN && card->getSuit() == SPADE) return true;
     for(int index = 0; index < cardsOnTable.size(); index++){
         Card* inGameCard = cardsOnTable[index];
-        // current played card is 7S
-        
-        //if the card is rank 7
+        //if the card is the same rank
         if(card->getRank() == inGameCard->getRank()) return true;
         // If the card is the same suit but one rank below
         if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()-1)) return true;

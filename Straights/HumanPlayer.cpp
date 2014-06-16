@@ -26,6 +26,7 @@ Command& HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
     Command* command;
     
     do{
+        std::cout << ">";
         std::cin>>*command;
         
     } while(command->type == BAD_COMMAND);
@@ -33,7 +34,7 @@ Command& HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
     return *command;
 }
 
-void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const{
+void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const {
     
     std::string displayMessage = "Cards on the table:/n";
     std::string clubs = "Clubs: ";
