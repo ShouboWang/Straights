@@ -1,9 +1,9 @@
 //
-//  Player.h
+//  Deck.h
 //  Straights
 //
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
 //
 
 #ifndef __Straights__Player__
@@ -17,11 +17,13 @@
 class Player{
 public:
     Player(std::string playerName);             // Constructor
+    ~Player();
     int getScore() const;                       // Responds to score request
     void setScore(const int &);                 // Set score
     void calculateScore();                      // Calculate score after each round
     void getDeltCards(Card*);                   // Add a card to the hand
     bool hasSevenSpade() const;                 // Checks if the player has the seven of spade
+    void printDiscardedCards() const;           // Print the list of discarded cards
     
     virtual Command* turn(std::vector<Card*>) const = 0;
     virtual void displayHand(std::vector<Card*>) const = 0;
@@ -48,10 +50,10 @@ protected:
         
         PlayerData(const std::string);
         PlayerData(const PlayerData& playerData);
-        ~PlayerData();
-        
     };                                          // Data hiding
     PlayerData* playerData;                     // Data hiding
+    
+    PlayerData* getData();
     
     static const std::string suits[SUIT_COUNT]; // Array of string that corresponds to the suit
     static const std::string ranks[RANK_COUNT]; // Array of string that corresponds to the rank

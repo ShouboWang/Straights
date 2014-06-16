@@ -1,9 +1,9 @@
 //
-//  Player.cpp
+//  Deck.h
 //  Straights
 //
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
 //
 
 #include "Player.h"
@@ -30,17 +30,12 @@ Player::PlayerData::PlayerData(std::string playerName):playerName_(playerName){
 // Copy constructor
 Player::PlayerData::PlayerData(const PlayerData& playerData):playerName_(playerData.playerName_){
     playerScore_ = playerData.playerScore_;
-    for(int index = 0; index < playerData.cardsInHand_.size(); index++) {
+    for(unsigned int index = 0; index < playerData.cardsInHand_.size(); index++) {
         cardsInHand_.push_back(playerData.cardsInHand_[index]);
     }
-    for(int index = 0; index < playerData.discardedCards_.size(); index++) {
+    for(unsigned int index = 0; index < playerData.discardedCards_.size(); index++) {
         discardedCards_.push_back(playerData.discardedCards_[index]);
     }
-}
-    
-// Destructor
-Player::PlayerData::~PlayerData(){
-    //something?
 }
 
 /*
@@ -55,6 +50,11 @@ Player::Player(std::string playerName){
 // Copye constructor for Player
 Player::Player(const Player& player) {
     playerData = new PlayerData(*player.playerData);
+}
+
+// Dectructor
+Player::~Player(){
+    delete playerData;
 }
 
 // Get the card delt and adds the card to hand
@@ -74,7 +74,7 @@ void Player::setScore(const int& newScore){
 
 // Checks if the player has the seven of spade
 bool Player::hasSevenSpade() const {
-    for(int index = 0; index < playerData->cardsInHand_.size(); index++) {
+    for(unsigned int index = 0; index < playerData->cardsInHand_.size(); index++) {
         if(playerData->cardsInHand_[index]->getSuit() == SPADE && playerData->cardsInHand_[index]->getRank() == SEVEN)
             return true;
     }
@@ -92,7 +92,7 @@ Card* Player::playCard(const Suit suit, const Rank rank){
 // Assume that the card already exist in the player's hand
 Card* Player::removeCardFromHand(const Suit suit, const Rank rank){
     
-    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
+    for(unsigned int index = 0; index < playerData->cardsInHand_.size(); index++){
         if(playerData->cardsInHand_[index]->getRank() == rank && playerData->cardsInHand_[index]->getSuit() == suit){
             Card* cardToReturn = playerData->cardsInHand_[index];
             playerData->cardsInHand_.erase(playerData->cardsInHand_.begin()+index);
@@ -110,7 +110,7 @@ void Player::calculateScore(){
     int newScore = 0;
     
     //find all discarded cards and calculate new score based on its rank
-    for (int i = 0; i < playerData->discardedCards_.size(); i++){
+    for (unsigned int i = 0; i < playerData->discardedCards_.size(); i++){
         discards.append(ranks[playerData->discardedCards_[i]->getRank()] +
                                     suits[playerData->discardedCards_[i]->getSuit()] + " ");
         newScore += playerData->discardedCards_[i]->getRank()+1;
@@ -129,7 +129,7 @@ void Player::calculateScore(){
 bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsOnTable) const {
         // Seven of Spade
         if(card->getRank() == SEVEN && card->getSuit() == SPADE) return true;
-        for(int index = 0; index < cardsOnTable.size(); index++){
+        for(unsigned int index = 0; index < cardsOnTable.size(); index++){
             Card* inGameCard = cardsOnTable[index];
             //if the card is the same rank
             if(card->getRank() == inGameCard->getRank()) return true;
@@ -144,10 +144,19 @@ bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsO
 // Returns a vector of Arrays that contains all the legal cards for a player's turn
 std::vector<Card*> Player::getLegalCards(const std::vector<Card*> cardsOnTable) const {
     std::vector<Card*> legalCards;
-    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
+    for(unsigned int index = 0; index < playerData->cardsInHand_.size(); index++){
         if(checkCardPlayable(playerData->cardsInHand_[index], cardsOnTable)){
             legalCards.push_back(playerData->cardsInHand_[index]);
         }
     }
     return legalCards;
+}
+
+// Print the list of discarded cards
+void Player::printDiscardedCards() const {
+    std::cout << "Player " << playerData->playerName_ << "’s discards: ";
+    for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++) {
+        std::cout << playerData->discardedCards_[index];
+    }
+    std::cout << std::endl;
 }

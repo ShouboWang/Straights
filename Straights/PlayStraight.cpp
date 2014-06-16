@@ -1,9 +1,9 @@
 //
-//  PlayStraight.cpp
+//  Deck.h
 //  Straights
 //
-//  Created by Jack on 2014-06-15.
-//  Copyright (c) 2014 Jack. All rights reserved.
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
 //
 
 #include "Game.h"

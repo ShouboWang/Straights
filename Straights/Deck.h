@@ -2,8 +2,8 @@
 //  Deck.h
 //  Straights
 //
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
 //
 
 #ifndef __Straights__Deck__
@@ -15,16 +15,16 @@
 
 class Deck{
 public:
-    Deck();             //constuctor
-    ~Deck();            //destructor
-    void shuffle();     //shuffle algorithm
-    Card* getNextCard();    // Recieve the next card in deck
-    void displayDeck() const;
+    Deck();                     // Constuctor
+    ~Deck();                    // Destructor
+    void shuffle();             // Apply a shuffle algorithm to the deck
+    Card* getNextCard();        // Retrive the next card in deck
+    void displayDeck() const;   // Prints the deck
     
 private:
-    int currentCardIndex_;
-    const int CARD_COUNT;
-    Card* cards_[52];
+    int currentCardIndex_;      // The current index of the card, used by getNextCard();
+    const int CARD_COUNT;       // The number of cards in the deck
+    Card* cards_[52];           // An Array that holds all the cards in the deck
 };
 
-#endif /* defined(__Straights__Deck__) */
+#endif

@@ -1,13 +1,17 @@
+//
+//  Deck.h
+//  Straights
+//
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
+//
+
 /*
  To do
- - Rage quit (game)
  - copy human->AI 
  - score (player)
  - round
  - AI
- - move player display to human only
- - quit
- - display deck
  - display order - smallest to largest
  */
 

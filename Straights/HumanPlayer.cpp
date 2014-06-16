@@ -1,9 +1,9 @@
 //
-//  HumanPlayer.cpp
+//  Deck.h
 //  Straights
 //
-//  Created by Jack on 2014-06-14.
-//  Copyright (c) 2014 Jack. All rights reserved.
+//  Created by Jack,Errin on 2014-06-14.
+//  Copyright (c) 2014 Jack,Errin. All rights reserved.
 //
 
 #include "HumanPlayer.h"
@@ -21,7 +21,7 @@ Command* HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
         std::cin>>*command;
         if(command->type == PLAY) {
             std::vector<Card*> legalCards = getLegalCards(cardsOnTable);
-            for(int index = 0; index < legalCards.size(); index++){
+            for(unsigned int index = 0; index < legalCards.size(); index++){
                 if(command->card.getSuit() == legalCards[index]->getSuit() &&
                    command->card.getRank() == legalCards[index]->getRank()){
                     legalPlay = true;
