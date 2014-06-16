@@ -85,7 +85,9 @@ bool Player::hasSevenSpade() const {
 // If the card is invalid play, throw runtime_error
 // If the card is valid play, remove the card from hand and return the card
 Card* Player::playCard(const Suit suit, const Rank rank){
-    return removeCardFromHand(suit, rank);
+    Card* card = removeCardFromHand(suit, rank);
+    std::cout << "Player " << playerData->playerName_ << " plays " << *card << "." <<std::endl;
+    return card;
 }
 
 // Remove a card from player's hand and returns the card back
@@ -103,26 +105,19 @@ Card* Player::removeCardFromHand(const Suit suit, const Rank rank){
     throw std::runtime_error("This is not a legal play.");
 }
 
-void Player::calculateScore(){
-    //print out the list of discarded cards of the player
-    std::cout<< playerData->playerName_ << "'s discards: ";
-    std::string discards="";
-    int newScore = 0;
+// Calculate the score based on the player's discarded cards
+int Player::calculateScore() const{
+    int score = 0;
     
-    //find all discarded cards and calculate new score based on its rank
-    for (unsigned int i = 0; i < playerData->discardedCards_.size(); i++){
-        discards.append(ranks[playerData->discardedCards_[i]->getRank()] +
-                                    suits[playerData->discardedCards_[i]->getSuit()] + " ");
-        newScore += playerData->discardedCards_[i]->getRank()+1;
+    for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++){
+        for(int rankIndex = 0; index < RANK_COUNT; index++) {
+            if(ranks[rankIndex] == ranks[playerData->discardedCards_[index]->getRank()]) {
+                score += (rankIndex + 1);
+            }
+        }
     }
-    std::cout << discards<< std::endl;
     
-    std::cout << playerData->playerName_ << "'s score: " << playerData->playerScore_
-                        << " + " << newScore << " = " << playerData->playerScore_+newScore;
-    
-    //calculate total score
-    playerData->playerScore_+=newScore;
-
+    return score;
 }
 
 // Checks if the card is a legal card to be played
@@ -132,7 +127,7 @@ bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsO
         for(unsigned int index = 0; index < cardsOnTable.size(); index++){
             Card* inGameCard = cardsOnTable[index];
             //if the card is the same rank
-            if(card->getRank() == inGameCard->getRank()) return true;
+            if(card->getRank() == SEVEN) return true;
             // If the card is the same suit but one rank below
             if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()-1)) return true;
             // If the card is the same suit but one rank above
@@ -156,7 +151,15 @@ std::vector<Card*> Player::getLegalCards(const std::vector<Card*> cardsOnTable) 
 void Player::printDiscardedCards() const {
     std::cout << "Player " << playerData->playerName_ << "’s discards: ";
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++) {
-        std::cout << playerData->discardedCards_[index];
+        std::cout << *playerData->discardedCards_[index];
     }
     std::cout << std::endl;
+}
+
+// Discard Card
+void Player::discardCard(const Suit suit, const Rank rank){
+    
+    Card* card = removeCardFromHand(suit, rank);
+    playerData->discardedCards_.push_back(card);
+    std::cout << "Player " << playerData->playerName_ <<" discards " << *card <<"."<<std::endl;
 }

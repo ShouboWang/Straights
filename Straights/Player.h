@@ -20,7 +20,7 @@ public:
     ~Player();
     int getScore() const;                       // Responds to score request
     void setScore(const int &);                 // Set score
-    void calculateScore();                      // Calculate score after each round
+    int calculateScore() const;                      // Calculate score after each round
     void getDeltCards(Card*);                   // Add a card to the hand
     bool hasSevenSpade() const;                 // Checks if the player has the seven of spade
     void printDiscardedCards() const;           // Print the list of discarded cards
@@ -30,6 +30,9 @@ public:
     
     // Command - play
     Card* playCard(const Suit, const Rank);
+    
+    // Command - Discard
+    void discardCard(const Suit, const Rank);
     
     
     //Card* playCard(const Suit, const Rank);
