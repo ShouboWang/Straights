@@ -16,34 +16,47 @@
 
 class Player{
 public:
-    Player(std::string playerName);
-    int getScore() const;
-    void setScore(const int &);              //set score
-    void calculateScore();                  //calculate score after each round
-    void receiveDeltCards(Card*);
-    virtual Command* turn(std::vector<Card*>) const = 0;
-    bool hasSevenSpade() const;
+    Player(std::string playerName);             // Constructor
+    int getScore() const;                       // Responds to score request
+    void setScore(const int &);                 // Set score
+    void calculateScore();                      // Calculate score after each round
+    void receiveDeltCards(Card*);               // Adds a card to the hand
+    virtual Command* turn(std::vector<Card*>) const = 0;    
+    virtual void displayHand(std::vector<Card*>) const = 0;
+    
+    
+    //Play
     Card* playCard(const Suit, const Rank);
-    std::string getPlayerName() const;                //accessor
+    
+    bool hasSevenSpade() const;
+    
+    
+    //Card* playCard(const Suit, const Rank);
     bool checkCardPlayable(const Card*, const std::vector<Card*>) const;
     
-    Card* getCardsOnHand(const int&) const;            //get the card of a certain index in cardsOnHand_
-    Card* getDiscardedCards(const int&) const;        //get the card of an index in DiscardedCards_
-    int getSizeCardsOnHand() const;                   //return size of CardsOnHand_
-    int getSizeDiscardedCards() const;                    //return size of DiscardedCards_
-    
 private:
-    Player(Player&);                                    //prohibited copy
-    Player& operator=(Player&);                         //prohibited assignment
+    Player& operator=(Player&);                             // Prohibited assignment operator
+    Card* removeCardFromHand(const Suit, const Rank);       // Returns a card from hand
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
-    const std::string playerName_;
-    int score_;
-    static const std::string suits[SUIT_COUNT];
-    static const std::string ranks[RANK_COUNT];
-
+    
 protected:
-    std::vector<Card*> cardsOnHand_;
-    std::vector<Card*> discardedCards_;
+    Player(const Player&);                      // Cope constructor that is used for AI/Human copying
+    
+    struct PlayerData{
+        const std::string playerName_;
+        int playerScore_;
+        std::vector<Card*> cardsInHand_;
+        std::vector<Card*> discardedCards_;
+        
+        PlayerData(const std::string);
+        PlayerData(const PlayerData& playerData);
+        ~PlayerData();
+        
+    };                                          // Data hiding
+    PlayerData* playerData;                     // Data hiding
+    
+    static const std::string suits[SUIT_COUNT]; // Array of string that corresponds to the suit
+    static const std::string ranks[RANK_COUNT]; // Array of string that corresponds to the rank
 };
 
-#endif /* defined(__Straights__Player__) */
+#endif

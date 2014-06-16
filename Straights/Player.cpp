@@ -8,6 +8,8 @@
 
 #include "Player.h"
 #include <vector>
+#include <stdexcept>
+#include <memory>
 
 
 const std::string Player::suits[SUIT_COUNT] = {"C", "D", "H", "S"};
@@ -15,39 +17,52 @@ const std::string Player::ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6",
     "7", "8", "9", "10", "J", "Q", "K"};
 
 
-Player::Player(std::string playerName):playerName_(playerName){
-    score_ = 0;
+
+/*
+ Struct Functions
+ */
+
+// Constructor
+Player::PlayerData::PlayerData(std::string playerName):playerName_(playerName){
+    playerScore_ = 0;
+}
+    
+// Copy constructor
+Player::PlayerData::PlayerData(const PlayerData& playerData):playerName_(playerData.playerName_){
+    playerScore_ = playerData.playerScore_;
+    for(int index = 0; index < playerData.cardsInHand_.size(); index++) {
+        cardsInHand_.push_back(playerData.cardsInHand_[index]);
+    }
+    for(int index = 0; index < playerData.discardedCards_.size(); index++) {
+        discardedCards_.push_back(playerData.discardedCards_[index]);
+    }
+}
+    
+// Destructor
+Player::PlayerData::~PlayerData(){
+    //something?
+}
+
+/*
+ Player Functions
+ */
+Player::Player(std::string playerName){
+    playerData = new PlayerData(playerName);
+    
+}
+
+Player::Player(const Player& player) {
+    playerData = new PlayerData(*player.playerData);
 }
 
 
 void Player::receiveDeltCards(Card* card) {
-    cardsOnHand_.push_back(card);//front or back
-}
-
-std::string Player::getPlayerName() const{
-    return playerName_;
+    playerData->cardsInHand_.push_back(card);
 }
 
 int Player::getScore() const {
-    return score_;
+    return playerData->playerScore_;
 }
-
-Card* Player::getCardsOnHand(const int& index) const{
-    return cardsOnHand_[index];
-}
-
-Card* Player::getDiscardedCards(const int& index) const{
-    return discardedCards_[index];
-}
-
-int Player::getSizeCardsOnHand() const{
-    return (int)cardsOnHand_.size();
-}
-
-int Player::getSizeDiscardedCards() const{
-    return (int)discardedCards_.size();
-}
-
 
 
 void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const{
@@ -78,15 +93,17 @@ void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::
     }
     
     std::string playerHand = "Your hand: ";
-    for(int index = 0; index < cardsOnHand_.size(); index++){
-        playerHand.append(ranks[cardsOnHand_[index]->getRank()]+suits[cardsOnHand_[index]->getSuit()]+" ");
+    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
+        playerHand.append(ranks[playerData->cardsInHand_[index]->getRank()]+
+                          suits[playerData->cardsInHand_[index]->getSuit()]+" ");
     }
     
     std::string playerLegalCards = "Legal plays: ";
-    for(int index = 0; index < cardsOnHand_.size(); index++){
+    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
         for(int legalIndex = 0; legalIndex < legalPlays.size(); legalIndex++){
-            if(cardsOnHand_[index] == legalPlays[legalIndex]){
-                playerLegalCards.append(ranks[cardsOnHand_[index]->getRank()]+suits[cardsOnHand_[index]->getSuit()]+" ");
+            if(playerData->cardsInHand_[index] == legalPlays[legalIndex]){
+                playerLegalCards.append(ranks[playerData->cardsInHand_[index]->getRank()]
+                                        +suits[playerData->cardsInHand_[index]->getSuit()]+" ");
             }
         }
     }
@@ -102,46 +119,58 @@ void Player::displayGameTable(const std::vector<Card*> cardsOnTable, const std::
 }
 
 void Player::setScore(const int& newScore){
-    score_ = newScore;
+    playerData->playerScore_ = newScore;
 }
 
 bool Player::hasSevenSpade() const {
-    for(int index = 0; index < cardsOnHand_.size(); index++) {
-        if(cardsOnHand_[index]->getSuit() == SPADE && cardsOnHand_[index]->getRank() == SEVEN) return true;
+    for(int index = 0; index < playerData->cardsInHand_.size(); index++) {
+        if(playerData->cardsInHand_[index]->getSuit() == SPADE && playerData->cardsInHand_[index]->getRank() == SEVEN)
+            return true;
     }
     return false;
 }
 
-Card* Player::playCard(const Suit suit, const Rank rank){
-    Card* cardToReturn = nullptr;
+// Responds to the "play" command
+// If the card is invalid play, throw runtime_error
+// If the card is valid play, remove the card from hand and return the card
+Card* playCard(const Suit, const Rank){
+    throw "error";
+}
+
+// Remove a card from player's hand and returns the card back
+// Assume that the card already exist in the player's hand
+Card* Player::removeCardFromHand(const Suit suit, const Rank rank){
     
-    for(int index = 0; index < cardsOnHand_.size(); index++){
-        if(cardsOnHand_[index]->getRank() == rank && cardsOnHand_[index]->getSuit() == suit){
-            cardToReturn = cardsOnHand_[index];
-            cardsOnHand_.erase(cardsOnHand_.begin()+index);
+    for(int index = 0; index < playerData->cardsInHand_.size(); index++){
+        if(playerData->cardsInHand_[index]->getRank() == rank && playerData->cardsInHand_[index]->getSuit() == suit){
+            Card* cardToReturn = playerData->cardsInHand_[index];
+            playerData->cardsInHand_.erase(playerData->cardsInHand_.begin()+index);
+            return cardToReturn;
         }
     }
     
-    return cardToReturn;
+    throw std::runtime_error("This is not a legal play.");
 }
 
 void Player::calculateScore(){
     //print out the list of discarded cards of the player
-    std::cout<< "Player " << playerName_ << "'s discards: ";
+    std::cout<< playerData->playerName_ << "'s discards: ";
     std::string discards="";
     int newScore = 0;
     
     //find all discarded cards and calculate new score based on its rank
-    for (int i = 0; i < discardedCards_.size(); i++){
-        discards.append(ranks[discardedCards_[i]->getRank()] + suits[discardedCards_[i]->getSuit()] + " ");
-        newScore += discardedCards_[i]->getRank()+1;
+    for (int i = 0; i < playerData->discardedCards_.size(); i++){
+        discards.append(ranks[playerData->discardedCards_[i]->getRank()] +
+                                    suits[playerData->discardedCards_[i]->getSuit()] + " ");
+        newScore += playerData->discardedCards_[i]->getRank()+1;
     }
     std::cout << discards<< std::endl;
     
-    std::cout<<"Player " << playerName_ << "'s score: " << score_<< " + " << newScore << " = " << score_+newScore;
+    std::cout << playerData->playerName_ << "'s score: " << playerData->playerScore_
+                        << " + " << newScore << " = " << playerData->playerScore_+newScore;
     
     //calculate total score
-    score_+=newScore;
+    playerData->playerScore_+=newScore;
 
 }
     

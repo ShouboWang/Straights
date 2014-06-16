@@ -16,6 +16,8 @@
 #include "Game.h"
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
+#include <memory>
 
 
 Game::Game(){
@@ -61,13 +63,30 @@ void Game::startGame(){
     std::cout << "A new round begins. ";
     for(int turnIndex = startingPlayer_;;turnIndex++){
         std::cout << "It’s player " << (turnIndex%4) << "’s turn to play."<<std::endl;
+        players_[turnIndex%4]->displayHand(cardsOnTable_);
         Command *command = players_[turnIndex%4]->turn(cardsOnTable_);
-        if(command->type == PLAY) {
-            cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command->card.getSuit(), command->card.getRank()));
-        }
         if(command->type == DECK){
-            deck_->displayDeck();
+            do{
+                deck_->displayDeck();
+                command = players_[turnIndex%4]->turn(cardsOnTable_);
+            }while(command->type == DECK);
         }
+        if(command->type == PLAY) {
+            do{
+                try{
+                    cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command->card.getSuit(), command->card.getRank()));
+                    break;
+                }catch(std::runtime_error& e){
+                    std::cout << e.what() << std::endl;
+                    command = players_[turnIndex%4]->turn(cardsOnTable_);
+                }
+            }while(true);
+        } else if(command->type == QUIT){
+            delete command;
+            return;
+        }
+        
+        delete command;
     }
 }
 
