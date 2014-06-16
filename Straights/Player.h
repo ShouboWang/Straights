@@ -33,6 +33,8 @@ private:
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
     const std::string playerName_;
     int score_;
+    static const std::string suits[SUIT_COUNT];
+    static const std::string ranks[RANK_COUNT];
 
 protected:
     std::vector<Card*> cardsOnHand_;
