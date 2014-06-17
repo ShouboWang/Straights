@@ -8,10 +8,6 @@
 
 /*
  To do
- - copy human->AI 
- - score (player)
- - round
- - AI
  - display order - smallest to largest
  */
 

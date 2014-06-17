@@ -9,7 +9,7 @@
 #include "Game.h"
 
 int main(int argc,char *argv[]){
-    srand48(1);
+    srand48(*argv[0]);
     Game* game = new Game();
     game->startGame();
     delete game;
