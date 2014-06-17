@@ -19,6 +19,7 @@ public:
     void displayHand(std::vector<Card*>) const;
 private:
     void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
+    std::string sort(const std::vector<Card*>&) const;                 //sorts the array of Suit
 };
 
 #endif
