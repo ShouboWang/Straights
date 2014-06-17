@@ -110,7 +110,8 @@ int Player::calculateScore() const{
     int score = 0;
     
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++){
-        for(int rankIndex = 0; index < RANK_COUNT; index++) {
+        for(int rankIndex = 0; rankIndex < RANK_COUNT; rankIndex++) {
+            int val = playerData->discardedCards_[index]->getRank();
             if(ranks[rankIndex] == ranks[playerData->discardedCards_[index]->getRank()]) {
                 score += (rankIndex + 1);
             }
@@ -151,7 +152,7 @@ std::vector<Card*> Player::getLegalCards(const std::vector<Card*> cardsOnTable) 
 void Player::printDiscardedCards() const {
     std::cout << "Player " << playerData->playerName_ << "’s discards: ";
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++) {
-        std::cout << *playerData->discardedCards_[index];
+        std::cout << *playerData->discardedCards_[index] << " ";
     }
     std::cout << std::endl;
 }
@@ -162,4 +163,9 @@ void Player::discardCard(const Suit suit, const Rank rank){
     Card* card = removeCardFromHand(suit, rank);
     playerData->discardedCards_.push_back(card);
     std::cout << "Player " << playerData->playerName_ <<" discards " << *card <<"."<<std::endl;
+}
+
+void Player::clearHand(){
+    playerData->cardsInHand_.clear();
+    playerData->discardedCards_.clear();
 }

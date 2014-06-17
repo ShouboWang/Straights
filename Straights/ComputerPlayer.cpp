@@ -13,10 +13,6 @@ Command* ComputerPlayer::turn(std::vector<Card*> cardsOnTable) const{
     Command* command = new Command();
     
     std::vector<Card*> legalCards = getLegalCards(cardsOnTable);
-    //for(int i = 0; i < legalCards.size(); i++){
-    //    std::cout << *legalCards[i]<<" ";
-    //}
-    //std::cout << std::endl;
     if(legalCards.size() >0){
         command->type = PLAY;
         command->card = *legalCards[0];
