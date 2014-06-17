@@ -48,11 +48,15 @@ void Game::startGame(){
     
     while(!gameEnd){
     
+        // Reset the game
         // Shuffle the deck
         deck_->shuffle();
+        cardsOnTable_.clear();
+        
     
         // Deal the cards
         for(int playerIndex = 0; playerIndex < 4; playerIndex ++){
+            players_[playerIndex]->clearHand();
             for(int cardI = 0; cardI < 13; cardI++){
                 players_[playerIndex]->getDeltCards(deck_->getNextCard());
             }
@@ -96,7 +100,7 @@ void Game::startGame(){
                 delete command;
                 return;
             } else if(command->type == RAGEQUIT) {
-                std::cout << "Player " << (turnIndex%4) << "ragequits. A computer will now take over." << std::endl;
+                std::cout << "Player " << (turnIndex%4) << " ragequits. A computer will now take over." << std::endl;
                 Player *player = new ComputerPlayer(*players_[turnIndex%4]);
                 delete players_[turnIndex%4];
                 players_[turnIndex%4] = player;
@@ -110,9 +114,28 @@ void Game::startGame(){
         for(int index = 0; index < 4; index++){
             players_[index]->printDiscardedCards();
             int roundScore = players_[index]->calculateScore();
+            std::cout << "Player " << (index + 1) << "’s score: " << (players_[index]->getScore()) << " + "
+            << roundScore << " = ";
+            players_[index]->setScore((roundScore + players_[index]->getScore()));
+            std::cout << players_[index]->getScore() << std::endl;
+            if(players_[index]->getScore() >= 80) {
+                gameEnd = true;
+            }
         }
-        gameEnd = true;
     }
+    
+    
+    int min = 300;
+    int winner = 0;
+    // Declear winner!
+    for(int index = 0; index < 4; index++){
+        if(players_[index]->getScore() < min) {
+            winner = index;
+            min = players_[index]->getScore();
+        }
+    }
+    std::cout << "Player " << (winner+1) << " wins!" << std::endl;
+    
 }
 
 

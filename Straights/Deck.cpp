@@ -50,6 +50,9 @@ void Deck::shuffle(){
         cards_[n] = cards_[k];
         cards_[k] = c;
     }
+    
+    // Reset the card positon back to 0
+    currentCardIndex_ = 0;
 }
 
 Card* Deck::getNextCard(){

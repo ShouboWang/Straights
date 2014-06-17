@@ -24,7 +24,6 @@ private:
     Player* players_[4];
     Deck* deck_;
     std::vector<Card*> cardsOnTable_;
-    std::vector<Card*> legalCardPlay_;
     int startingPlayer_;
 };
 

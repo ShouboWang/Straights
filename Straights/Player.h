@@ -24,6 +24,7 @@ public:
     void getDeltCards(Card*);                   // Add a card to the hand
     bool hasSevenSpade() const;                 // Checks if the player has the seven of spade
     void printDiscardedCards() const;           // Print the list of discarded cards
+    void clearHand();
     
     virtual Command* turn(std::vector<Card*>) const = 0;
     virtual void displayHand(std::vector<Card*>) const = 0;
