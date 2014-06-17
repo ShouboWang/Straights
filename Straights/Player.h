@@ -41,7 +41,7 @@ public:
     
 private:
     Player& operator=(Player&);                             // Prohibited assignment operator
-    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
+    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>);
     
 protected:
     Player(const Player&);                      // Cope constructor that is used for AI/Human copying
