@@ -19,14 +19,15 @@
 #include <stdexcept>
 #include <memory>
 
-
+//constructor
 Game::Game(){
     deck_ = new Deck();
 }
 
+//destructor
 Game::~Game(){
     
-    // Delete players
+    // Delete players in array
     for(int index = 0; index < 4; index++){
         delete players_[index];
     }
@@ -35,6 +36,7 @@ Game::~Game(){
     delete deck_;
 };
 
+//function to start the game
 void Game::startGame(){
     
     // Invite players
@@ -42,6 +44,7 @@ void Game::startGame(){
     
     bool gameEnd = false;
     
+    //perform operations while it is not the end of the game
     while(!gameEnd){
     
         // Reset the game
@@ -53,12 +56,14 @@ void Game::startGame(){
         // Deal the cards
         for(int playerIndex = 0; playerIndex < 4; playerIndex ++){
             players_[playerIndex]->clearHand();
+            
+            //every player gets 13 cards stored in their hand
             for(int cardI = 0; cardI < 13; cardI++){
                 players_[playerIndex]->getDeltCards(deck_->getNextCard());
             }
         }
     
-        // Get the player that should go first
+        // Get the player that should go first, has 7 of spade
         for(int playerIndex = 0; playerIndex < 4; playerIndex++){
             if(players_[playerIndex]->hasSevenSpade()){
                 startingPlayer_ = playerIndex;
@@ -70,11 +75,16 @@ void Game::startGame(){
         int turn = 0;
         std::cout << "A new round begins. It’s player " << (startingPlayer_+1) << "’s turn to play."<<std::endl;
         for(int turnIndex = startingPlayer_; turn < 52; turnIndex++){
+            
+            //displays information about the current turn
             players_[turnIndex%4]->displayHand(cardsOnTable_);
+            
+            //inputs player's command
             Command *command = players_[turnIndex%4]->turn(cardsOnTable_);
         
             if(command->type == DECK){
                 do{
+                    //display total deck
                     deck_->displayDeck();
                     command = players_[turnIndex%4]->turn(cardsOnTable_);
                 }while(command->type == DECK);
@@ -83,6 +93,7 @@ void Game::startGame(){
             if(command->type == PLAY) {
                 do{
                     try{
+                        // play the card and add the card to the current played cards
                         cardsOnTable_.push_back(players_[turnIndex%4]->playCard(command->card.getSuit(), command->card.getRank()));
                     break;
                     }catch(std::runtime_error& e){
@@ -91,14 +102,22 @@ void Game::startGame(){
                     }
                 }while(true);
             } else if(command->type == DISCARD){
+                
+                // discard the card if no legal plays
                 players_[turnIndex%4]->discardCard(command->card.getSuit(), command->card.getRank());
             }else if(command->type == QUIT){
+                
+                // quit the game immediately
                 delete command;
                 return;
             } else if(command->type == RAGEQUIT) {
                 std::cout << "Player " << (turnIndex%4) << " ragequits. A computer will now take over." << std::endl;
+                
+                //player rage quits, and the computer takes over
                 Player *player = new ComputerPlayer(*players_[turnIndex%4]);
                 delete players_[turnIndex%4];
+                
+                // resign the player with computer player
                 players_[turnIndex%4] = player;
             }
         
@@ -106,14 +125,21 @@ void Game::startGame(){
             ++turn;
         }
         
-        // Turn is 13, All players have played their cards
+        // All players have played their cards, calculate the score
         for(int index = 0; index < 4; index++){
+            // print discarded cards for a player
             players_[index]->printDiscardedCards();
+            // calculate the score for current round
             int roundScore = players_[index]->calculateScore();
+            
             std::cout << "Player " << (index + 1) << "’s score: " << (players_[index]->getScore()) << " + "
             << roundScore << " = ";
+            
+            //reset the score of the player with the new round score added
             players_[index]->setScore((roundScore + players_[index]->getScore()));
             std::cout << players_[index]->getScore() << std::endl;
+            
+            //if any player's score is at least 80, end the game
             if(players_[index]->getScore() >= 80) {
                 gameEnd = true;
             }
@@ -125,19 +151,19 @@ void Game::startGame(){
     int winner = 0;
     // Declear winner!
     for(int index = 0; index < 4; index++){
+        //find the winner with minimum score
         if(players_[index]->getScore() < min) {
-            winner = index;
+            winner = index+1;
             min = players_[index]->getScore();
         }
     }
-    std::cout << "Player " << (winner+1) << " wins!" << std::endl;
-    
+    std::cout << "Player " << winner << " wins!" << std::endl;
 }
 
 
 
 
-
+// invite 4 players of either human or computer at the beginning of a game
 void Game::invitePlayers(){
     std::string playerType;
     
@@ -151,6 +177,8 @@ void Game::invitePlayers(){
         if(std::cin.eof()){
             std::exit(0);
         }
+        
+        // create a human or a computer player for the game
         if(playerType == "h"){
             players_[index] = new HumanPlayer(oss.str());
         } else if(playerType == "c"){

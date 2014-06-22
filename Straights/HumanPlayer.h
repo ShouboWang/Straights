@@ -14,11 +14,11 @@
 
 class HumanPlayer: public Player{
 public:
-    HumanPlayer(std::string);
-    Command* turn(std::vector<Card*>) const;
-    void displayHand(std::vector<Card*>) const;
+    HumanPlayer(std::string);                                           //constructor
+    Command* turn(std::vector<Card*>) const;                            //check for legal commands
+    void displayHand(std::vector<Card*>) const;                         //display the cards currently on hand
 private:
-    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;
+    void displayGameTable(const std::vector<Card*>, const std::vector<Card*>) const;    // display the cards that have already been played
     std::string sort(const std::vector<Card*>&) const;                 //sorts the array of Suit
 };
 
