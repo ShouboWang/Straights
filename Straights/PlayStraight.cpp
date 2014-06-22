@@ -10,13 +10,12 @@
 
 int main(int argc,char *argv[]){
     
-    
+    // Get the argument
     std::string num = "";
     for(int i = 1; i < argc; i++)
         num += argv[i];
     
     int number = atoi(num.c_str());
-    std::cout<< number << std::endl;
     
     srand48(number);
     Game* game = new Game();
