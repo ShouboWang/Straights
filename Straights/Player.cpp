@@ -111,7 +111,7 @@ int Player::calculateScore() const{
     
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++){
         for(int rankIndex = 0; rankIndex < RANK_COUNT; rankIndex++) {
-            int val = playerData->discardedCards_[index]->getRank();
+//            int val = playerData->discardedCards_[index]->getRank();
             if(ranks[rankIndex] == ranks[playerData->discardedCards_[index]->getRank()]) {
                 score += (rankIndex + 1);
             }

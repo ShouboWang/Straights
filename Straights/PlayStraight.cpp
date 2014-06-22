@@ -9,7 +9,21 @@
 #include "Game.h"
 
 int main(int argc,char *argv[]){
-    srand48(*argv[0]);
+    
+    
+    std::cout << argc << std::endl;
+    
+    std::string number = "";
+    
+    for(int i = 0; i < argc; i++) {
+        std::cout << *argv[i] << std::endl;
+        number += *argv[i];
+    }
+    
+    std::cout << number << std::endl;
+    
+    
+    srand48(argc);
     Game* game = new Game();
     game->startGame();
     delete game;
