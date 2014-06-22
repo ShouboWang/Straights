@@ -8,6 +8,7 @@
 
 #include "Deck.h"
 
+//constructor
 Deck::Deck():CARD_COUNT(52){
     
     currentCardIndex_ = 0;
@@ -55,10 +56,12 @@ void Deck::shuffle(){
     currentCardIndex_ = 0;
 }
 
+//accessor
 Card* Deck::getNextCard(){
     return cards_[currentCardIndex_++];
 }
 
+//display the deck in rows of 13
 void Deck::displayDeck() const {
     for(int row = 0; row < 4; row++){
         for(int col = 0; col < 13; col++)

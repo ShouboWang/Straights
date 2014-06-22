@@ -16,15 +16,15 @@
 
 class Game{
 public:
-    Game();
-    ~Game();
-    void startGame();
+    Game();                                 //constructor
+    ~Game();                                //destructor
+    void startGame();                       //start the game
 private:
-    void invitePlayers();
-    Player* players_[4];
-    Deck* deck_;
-    std::vector<Card*> cardsOnTable_;
-    int startingPlayer_;
+    void invitePlayers();                   //add players
+    Player* players_[4];                    //array of a set of players
+    Deck* deck_;                            //contains a complete set of deck
+    std::vector<Card*> cardsOnTable_;       //holds the cards that has been played
+    int startingPlayer_;                    //indicate who has the 7 of spade
 };
 
 
