@@ -71,7 +71,7 @@ void HumanPlayer::displayHand(std::vector<Card*> cardsOnTable) const{
 void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const std::vector<Card*> legalPlays) const{
     
     //prepare to display the cards that have already been played
-    std::string displayMessage = "Cards on the table:";
+    std::string displayMessage = "Cards on the table: ";
     
     std::vector<Card*> clubs;
     std::vector<Card*> diamonds;
@@ -105,28 +105,28 @@ void HumanPlayer::displayGameTable(const std::vector<Card*> cardsOnTable, const 
     std::string spadesSorted = sort(spades);
     
     //prepare to display the cards on hand
-    std::string playerHand = "Your hand: ";
+    std::string playerHand = "Your hand:";
     
     for(unsigned int index = 0; index < playerData-> cardsInHand_.size(); index++){
-        playerHand.append(ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]+" ");
+        playerHand.append(" "+ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]);
     }
     
     //prepare the information of the list of legal plays on player's hand
-    std::string playerLegalCards = "Legal plays: ";
+    std::string playerLegalCards = "Legal plays:";
     for(unsigned int index = 0; index < playerData->cardsInHand_.size(); index++){
         for(unsigned int legalIndex = 0; legalIndex < legalPlays.size(); legalIndex++){
             if(playerData->cardsInHand_[index] == legalPlays[legalIndex]){
-                playerLegalCards.append(ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]+" ");
+                playerLegalCards.append(" "+ranks[playerData->cardsInHand_[index]->getRank()]+suits[playerData->cardsInHand_[index]->getSuit()]);
             }
         }
     }
     
     //print out the prepared messages
     std::cout << displayMessage << std::endl;
-    std::cout << "Clubs: " << clubsSorted << std::endl;
-    std::cout << "Diamonds: " << diamondsSorted<<std::endl;
-    std::cout << "Hearts: " << heartsSorted<<std::endl;
-    std::cout << "Spades: " <<spadesSorted <<std::endl;
+    std::cout << "Clubs:" << clubsSorted << std::endl;
+    std::cout << "Diamonds:" << diamondsSorted<<std::endl;
+    std::cout << "Hearts:" << heartsSorted<<std::endl;
+    std::cout << "Spades:" <<spadesSorted <<std::endl;
     std::cout << playerHand << std::endl;
     std::cout << playerLegalCards << std::endl;
     
@@ -139,7 +139,7 @@ std::string HumanPlayer::sort(const std::vector<Card*>& cards) const{
     for (int i = 0; i < 13; i ++){
         for (int j = 0; j < cards.size(); j++){
             // append the card rank to the string
-            if (i == cards[j]->getRank())   combine.append(ranks[cards[j]->getRank()]+ " ");
+            if (i == cards[j]->getRank())   combine.append(" "+ranks[cards[j]->getRank()]);
         }
     }
     return combine;

@@ -72,9 +72,8 @@ void Game::startGame(){
         }
     
         // Start of the game
-        int turn = 0;
-        std::cout << "A new round begins. It’s player " << (startingPlayer_+1) << "’s turn to play."<<std::endl;
-        for(int turnIndex = startingPlayer_; turn < 52; turnIndex++){
+        std::cout << "A new round begins. It's player " << (startingPlayer_+1) << "'s turn to play."<<std::endl;
+        for(int turnIndex = startingPlayer_; turnIndex < startingPlayer_+52; turnIndex++){
             
             //displays information about the current turn
             players_[turnIndex%4]->displayHand(cardsOnTable_);
@@ -99,6 +98,7 @@ void Game::startGame(){
                     }catch(std::runtime_error& e){
                         std::cout << e.what() << std::endl;
                         command = players_[turnIndex%4]->turn(cardsOnTable_);
+                        turnIndex--;
                     }
                 }while(true);
             } else if(command->type == DISCARD){
@@ -111,7 +111,7 @@ void Game::startGame(){
                 delete command;
                 return;
             } else if(command->type == RAGEQUIT) {
-                std::cout << "Player " << (turnIndex%4) << " ragequits. A computer will now take over." << std::endl;
+                std::cout << "Player " << (turnIndex%4)+1 << " ragequits. A computer will now take over." << std::endl;
                 
                 //player rage quits, and the computer takes over
                 Player *player = new ComputerPlayer(*players_[turnIndex%4]);
@@ -119,10 +119,10 @@ void Game::startGame(){
                 
                 // resign the player with computer player
                 players_[turnIndex%4] = player;
+                turnIndex--;
             }
         
             delete command;
-            ++turn;
         }
         
         // All players have played their cards, calculate the score
@@ -132,7 +132,7 @@ void Game::startGame(){
             // calculate the score for current round
             int roundScore = players_[index]->calculateScore();
             
-            std::cout << "Player " << (index + 1) << "’s score: " << (players_[index]->getScore()) << " + "
+            std::cout << "Player " << (index + 1) << "'s score: " << (players_[index]->getScore()) << " + "
             << roundScore << " = ";
             
             //reset the score of the player with the new round score added

@@ -11,19 +11,12 @@
 int main(int argc,char *argv[]){
     
     
-    std::cout << argc << std::endl;
+    std::string num = "";
+    for(int i = 1; i < argc; i++)
+        num += argv[i];
     
-    std::string number = "";
-    
-    for(int i = 0; i < argc; i++) {
-        std::cout << *argv[i] << std::endl;
-        number += *argv[i];
-    }
-    
-    std::cout << number << std::endl;
-    
-    
-    srand48(argc);
+    int number = atoi(num.c_str());
+    srand48(number);
     Game* game = new Game();
     game->startGame();
     delete game;

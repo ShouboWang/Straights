@@ -114,7 +114,8 @@ int Player::calculateScore() const{
     
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++){
         for(int rankIndex = 0; rankIndex < RANK_COUNT; rankIndex++) {
-//            int val = playerData->discardedCards_[index]->getRank();
+            
+            //check for the existance of enum rank
             if(ranks[rankIndex] == ranks[playerData->discardedCards_[index]->getRank()]) {
                 score += (rankIndex + 1);
             }
@@ -157,7 +158,7 @@ std::vector<Card*> Player::getLegalCards(const std::vector<Card*> cardsOnTable) 
 
 // Print the list of discarded cards
 void Player::printDiscardedCards() const {
-    std::cout << "Player " << playerData->playerName_ << "’s discards: ";
+    std::cout << "Player " << playerData->playerName_ << "'s discards: ";
     
     //the list of cards are in the order where they're discarded
     for(unsigned int index = 0; index < playerData->discardedCards_.size(); index++) {

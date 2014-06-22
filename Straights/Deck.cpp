@@ -68,4 +68,5 @@ void Deck::displayDeck() const {
             std::cout << *cards_[row*13+col] << " ";
         std::cout<<std::endl;
     }
+    std::cout<<std::endl;
 }
