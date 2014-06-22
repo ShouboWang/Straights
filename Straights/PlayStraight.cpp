@@ -16,6 +16,8 @@ int main(int argc,char *argv[]){
         num += argv[i];
     
     int number = atoi(num.c_str());
+    std::cout<< number << std::endl;
+    
     srand48(number);
     Game* game = new Game();
     game->startGame();

@@ -25,15 +25,10 @@ public:
     bool hasSevenSpade() const;                 // Checks if the player has the seven of spade
     void printDiscardedCards() const;           // Print the list of discarded cards
     void clearHand();                           //clear the cards without deleting the objects that it points to
-    
     virtual Command* turn(std::vector<Card*>) const = 0;        //check for legal plays from the command
     virtual void displayHand(std::vector<Card*>) const = 0;     //display the current cards on hand
-    
     Card* playCard(const Suit, const Rank);                     //operations to play the card
-    
     void discardCard(const Suit, const Rank);                   //operations to discard the card
-    
-    bool checkCardPlayable(const Card*, const std::vector<Card*>) const;    //helper function to check whether is a legal play
     
 private:
     Player& operator=(Player&);                                 // Prohibited assignment operator
@@ -53,12 +48,12 @@ protected:
     };                                          // Data hiding
     PlayerData* playerData;                     // Data hiding
     
-    PlayerData* getData();
-    
     static const std::string suits[SUIT_COUNT]; // Array of string that corresponds to the suit
     static const std::string ranks[RANK_COUNT]; // Array of string that corresponds to the rank
     std::vector<Card*> getLegalCards(const std::vector<Card*>) const;
     Card* removeCardFromHand(const Suit, const Rank);       // Returns a card from hand
+    bool checkCardPlayable(const Card*, const std::vector<Card*>) const;    //helper function to check whether is a legal play
+    
 };
 
 #endif
