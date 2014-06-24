@@ -151,8 +151,8 @@ m2=4
     <coordinates>
       <x>209</x>
       <y>143</y>
-      <w>341</w>
-      <h>44</h>
+      <w>351</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 m1=1
@@ -165,8 +165,8 @@ m2=1
     <coordinates>
       <x>704</x>
       <y>847</y>
-      <w>54</w>
-      <h>120</h>
+      <w>44</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>33;33;33;99</additional_attributes>
@@ -176,8 +176,8 @@ m2=1
     <coordinates>
       <x>506</x>
       <y>913</y>
-      <w>417</w>
-      <h>54</h>
+      <w>407</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-
 </panel_attributes>
@@ -188,8 +188,8 @@ m2=1
     <coordinates>
       <x>869</x>
       <y>913</y>
-      <w>54</w>
-      <h>109</h>
+      <w>44</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=-
 m2=0.4
@@ -201,8 +201,8 @@ m2=0.4
     <coordinates>
       <x>506</x>
       <y>913</y>
-      <w>54</w>
-      <h>109</h>
+      <w>44</w>
+      <h>99</h>
     </coordinates>
     <panel_attributes>lt=-
 m2=0.4</panel_attributes>
@@ -303,11 +303,12 @@ m2=1
     <coordinates>
       <x>0</x>
       <y>539</y>
-      <w>54</w>
+      <w>62</w>
       <h>549</h>
     </coordinates>
     <panel_attributes>lt=-
-m1=1</panel_attributes>
+m1=0..13
+</panel_attributes>
     <additional_attributes>33;33;33;528</additional_attributes>
   </element>
   <element>
@@ -315,8 +316,8 @@ m1=1</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>1034</y>
-      <w>175</w>
-      <h>54</h>
+      <w>165</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>154;33;33;33</additional_attributes>
@@ -326,8 +327,8 @@ m1=1</panel_attributes>
     <coordinates>
       <x>0</x>
       <y>935</y>
-      <w>824</w>
-      <h>54</h>
+      <w>814</w>
+      <h>44</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
     <additional_attributes>33;33;803;33</additional_attributes>
@@ -337,8 +338,8 @@ m1=1</panel_attributes>
     <coordinates>
       <x>770</x>
       <y>935</y>
-      <w>54</w>
-      <h>87</h>
+      <w>44</w>
+      <h>77</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>33;66;33;33</additional_attributes>
@@ -352,7 +353,7 @@ m1=1</panel_attributes>
       <h>54</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;-
-r1=0..13</panel_attributes>
+r1=1</panel_attributes>
     <additional_attributes>99;33;33;33</additional_attributes>
   </element>
   <element>
@@ -363,7 +364,7 @@ r1=0..13</panel_attributes>
       <w>231</w>
       <h>55</h>
     </coordinates>
-    <panel_attributes>PLayStraight
+    <panel_attributes>PlayStraight
 --
 + main(int, char*): void</panel_attributes>
     <additional_attributes/>
@@ -373,13 +374,50 @@ r1=0..13</panel_attributes>
     <coordinates>
       <x>649</x>
       <y>22</y>
-      <w>44</w>
-      <h>121</h>
+      <w>54</w>
+      <h>131</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-
 r2=1
 r1=1
 </panel_attributes>
     <additional_attributes>33;33;33;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>264</x>
+      <y>253</y>
+      <w>296</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m1=1
+</panel_attributes>
+    <additional_attributes>275;33;33;33</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>264</x>
+      <y>253</y>
+      <w>54</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>lt=-
+</panel_attributes>
+    <additional_attributes>33;33;33;209</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>209</x>
+      <y>429</y>
+      <w>109</w>
+      <h>54</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m2=0..52</panel_attributes>
+    <additional_attributes>33;33;88;33</additional_attributes>
   </element>
 </diagram>
