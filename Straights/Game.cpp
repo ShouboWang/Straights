@@ -147,17 +147,19 @@ void Game::startGame(){
     }
     
     
-    int min = 300;
-    int winner = 0;
+    int min = players_[0]->getScore();
     // Declear winner!
-    for(int index = 0; index < 4; index++){
+    for(int index = 1; index < 4; index++){
         //find the winner with minimum score
         if(players_[index]->getScore() < min) {
-            winner = index+1;
             min = players_[index]->getScore();
         }
     }
-    std::cout << "Player " << winner << " wins!" << std::endl;
+    for (int index = 0; index < 4; index ++){
+        if (players_[index]->getScore()== min){
+            std::cout << "Player " << index+1 << " wins!" << std::endl;
+        }
+    }
 }
 
 

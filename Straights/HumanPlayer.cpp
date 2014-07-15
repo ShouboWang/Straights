@@ -37,6 +37,8 @@ Command* HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
             // discarding a card is allowed if there is no legal playable cards
             if(legalCards.size() == 0) {
                 legalPlay = true;
+            } else {
+                std::cout << "You have a legal play. You may not discard." << std::endl;
             }
         } else if(command->type == QUIT){
             //quit is a legal command
@@ -49,7 +51,7 @@ Command* HumanPlayer::turn(std::vector<Card*> cardsOnTable) const{
             legalPlay = true;
         }
         // handle if it is not a legal play
-        if(!legalPlay){
+        if(!legalPlay && command->type != DISCARD){
             std::cout << "This is not a legal play." << std::endl;
         }
         

@@ -128,18 +128,18 @@ int Player::calculateScore() const{
 // Checks if the card is a legal card to be played
 bool Player::checkCardPlayable(const Card* card, const std::vector<Card*> cardsOnTable) const {
     
-        // Seven of Spade
-        if(card->getRank() == SEVEN && card->getSuit() == SPADE) return true;
-    
-        for(unsigned int index = 0; index < cardsOnTable.size(); index++){
-            Card* inGameCard = cardsOnTable[index];
-            //if the card is the same rank
-            if(card->getRank() == SEVEN) return true;
-            // If the card is the same suit but one rank below
-            if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()-1)) return true;
-            // If the card is the same suit but one rank above
-            if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()+1)) return true;
-        }
+    // Seven of Spade
+    if(card->getRank() == SEVEN && card->getSuit() == SPADE) return true;
+
+    for(unsigned int index = 0; index < cardsOnTable.size(); index++){
+        Card* inGameCard = cardsOnTable[index];
+        //if the card is the same rank
+        if(card->getRank() == SEVEN) return true;
+        // If the card is the same suit but one rank below
+        if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()-1)) return true;
+        // If the card is the same suit but one rank above
+        if(card->getSuit() == inGameCard->getSuit() && card->getRank() == (inGameCard->getRank()+1)) return true;
+    }
     return false;
 }
 
